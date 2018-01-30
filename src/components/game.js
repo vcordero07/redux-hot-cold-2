@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import './game.css';
 
@@ -6,7 +7,9 @@ import GuessSection from './guess'
 import FeedbackSection from './feedback'
 import InfoSection from './info'
 
-export default class Game extends React.Component {
+import { makeGuess } from '../actions';
+
+class Game extends React.Component {
 constructor(props){
   super(props);
   this.state = {
@@ -38,6 +41,7 @@ constructor(props){
       this.setState({ feeback: 'Please enter a valid number'});
       return
     }
+    this.props.dispatch(makeGuess(guess))
     const diff = Math.abs(guess - this.state.answer);
 
     let feedback;
@@ -88,11 +92,11 @@ constructor(props){
         <main>
           <GuessSection
             feedback={this.state.feedback}
-            onMakeGuess={guess => this._makeGuess(guess)}
+            onMakeGuess={this._makeGuess}
             />
           <FeedbackSection
-            guessList={this.state.guesses.join(', ')}
-            guessCount={this.state.guesses.length}
+            guessList={this.props.guesses.join(', ')}
+            guessCount={this.props.guesses.length}
             />
           <div style={{display: this.state.gameInfo ? 'block' : 'none' }}>
           <InfoSection  /></div>
@@ -101,3 +105,11 @@ constructor(props){
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    guesses: state.guesses
+  }
+}
+
+export default connect(mapStateToProps)(Game);

@@ -1,3 +1,7 @@
-import {createStore} from 'redux';
-import reducer from './reducer';
-export default createStore(reducer);
+import { createStore, compose } from 'redux';
+
+import reducer from './reducers';
+export default createStore(reducer, undefined, 
+  compose(window.devToolsExtension ? window.devToolsExtension() : f => f
+
+));
