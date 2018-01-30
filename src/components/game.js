@@ -7,7 +7,7 @@ import GuessSection from './guess'
 import FeedbackSection from './feedback'
 import InfoSection from './info'
 
-import { makeGuess } from '../actions';
+import { makeGuess, restartGame } from '../actions';
 
 class Game extends React.Component {
 constructor(props){
@@ -81,7 +81,8 @@ constructor(props){
               <a
                 href="#new-game"
                 className="new-game"
-                onClick={this._newGame}
+
+                onClick={() => this.props.dispatch(restartGame())}
                 >+ new game
               </a>
             </li>
