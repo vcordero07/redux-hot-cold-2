@@ -28,43 +28,6 @@ constructor(props){
     });
   }
 
-  // _newGame = () => {
-  //   this.setState({
-  //     gameInfo: false,
-  //     guesses: [],
-  //     answer: Math.round(Math.random() * 100),
-  //     feedback: 'Make your guess!'
-  //   });
-  // }
-
-  // _makeGuess = (guess) => {
-  //   if (isNaN(guess)) {
-  //     this.setState({ feeback: 'Please enter a valid number'});
-  //     return
-  //   }
-  //   this.props.dispatch(makeGuess(guess))
-  //   const diff = Math.abs(guess - this.state.answer);
-  //
-  //   let feedback;
-  //   if (diff >= 30) {
-  //     feedback = `You are cold`;
-  //   }
-  //   else if (diff >= 10) {
-  //     feedback = `You are warm`;
-  //   }
-  //   else if (diff >= 1) {
-  //     feedback = `You are hot`;
-  //   }
-  //   else {
-  //     feedback = `You got it`;
-  //   }
-  //
-  //   this.setState({
-  //     feedback,
-  //     guesses: [...this.state.guesses, guess]
-  //   });
-  // }
-
   render() {
     return (
       <div>
