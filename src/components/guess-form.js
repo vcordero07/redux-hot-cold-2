@@ -1,5 +1,6 @@
 import React from 'react';
-
+import {connect} from 'react-redux';
+import {makeGuess} from '../actions';
 import './guess.css';
 
 export class GuessForm extends React.Component{
@@ -11,10 +12,8 @@ export class GuessForm extends React.Component{
   }
   onSubmit(event) {
     event.preventDefault();
+    this.props.dispatch(makeGuess(this.state.inputValue));
 
-    if (this.props.onMakeGuess) {
-      this.props.onMakeGuess(this.state.inputValue);
-    }
     this.setState({
       inputValue: ''
     })
@@ -55,11 +54,5 @@ export class GuessForm extends React.Component{
   }
 }
 
-export default function GuessSection(props) {
-  return (
-    <section id="guess" >
-      <h2 id="guess-title">{props.feedback}</h2>
-      <GuessForm onMakeGuess={guess => props.onMakeGuess(guess)} />
-    </section>
-  );
-}
+
+export default connect()(GuessForm);

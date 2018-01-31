@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 
 import './game.css';
 
-import GuessSection from './guess'
-import FeedbackSection from './feedback'
+import GuessSection from './guess-section';
+import GuessForm from './guess-form';
+import FeedbackSection from './feedback';
 import InfoSection from './info'
 
 import { makeGuess, restartGame } from '../actions';
@@ -27,42 +28,42 @@ constructor(props){
     });
   }
 
-  _newGame = () => {
-    this.setState({
-      gameInfo: false,
-      guesses: [],
-      answer: Math.round(Math.random() * 100),
-      feedback: 'Make your guess!'
-    });
-  }
+  // _newGame = () => {
+  //   this.setState({
+  //     gameInfo: false,
+  //     guesses: [],
+  //     answer: Math.round(Math.random() * 100),
+  //     feedback: 'Make your guess!'
+  //   });
+  // }
 
-  _makeGuess = (guess) => {
-    if (isNaN(guess)) {
-      this.setState({ feeback: 'Please enter a valid number'});
-      return
-    }
-    this.props.dispatch(makeGuess(guess))
-    const diff = Math.abs(guess - this.state.answer);
-
-    let feedback;
-    if (diff >= 30) {
-      feedback = `You are cold`;
-    }
-    else if (diff >= 10) {
-      feedback = `You are warm`;
-    }
-    else if (diff >= 1) {
-      feedback = `You are hot`;
-    }
-    else {
-      feedback = `You got it`;
-    }
-
-    this.setState({
-      feedback,
-      guesses: [...this.state.guesses, guess]
-    });
-  }
+  // _makeGuess = (guess) => {
+  //   if (isNaN(guess)) {
+  //     this.setState({ feeback: 'Please enter a valid number'});
+  //     return
+  //   }
+  //   this.props.dispatch(makeGuess(guess))
+  //   const diff = Math.abs(guess - this.state.answer);
+  //
+  //   let feedback;
+  //   if (diff >= 30) {
+  //     feedback = `You are cold`;
+  //   }
+  //   else if (diff >= 10) {
+  //     feedback = `You are warm`;
+  //   }
+  //   else if (diff >= 1) {
+  //     feedback = `You are hot`;
+  //   }
+  //   else {
+  //     feedback = `You got it`;
+  //   }
+  //
+  //   this.setState({
+  //     feedback,
+  //     guesses: [...this.state.guesses, guess]
+  //   });
+  // }
 
   render() {
     return (
@@ -92,8 +93,8 @@ constructor(props){
         </header>
         <main>
           <GuessSection
-            feedback={this.state.feedback}
-            onMakeGuess={this._makeGuess}
+           feedback={this.props.feedback}
+            // onMakeGuess={this._makeGuess}
             />
           <FeedbackSection
             guessList={this.props.guesses.join(', ')}
@@ -109,7 +110,8 @@ constructor(props){
 
 const mapStateToProps = (state) => {
   return {
-    guesses: state.guesses
+    guesses: state.guesses,
+    feedback: state.feedback
   }
 }
 
