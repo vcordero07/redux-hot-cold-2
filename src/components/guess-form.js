@@ -41,12 +41,14 @@ export class GuessForm extends React.Component{
             value={this.state.inputValue}
             onChange={this._onChange}
             required
+            disabled={this.props.btnDisabled}
             />
           <button
             type="submit"
             name="submit"
             id="guessButton"
             className="button"
+            disabled={this.props.btnDisabled}
             >Guess
           </button>
         </form>
@@ -54,5 +56,10 @@ export class GuessForm extends React.Component{
   }
 }
 
+const mapStatetoProps = (state) => {
+  return {
+    btnDisabled: !!(state.guesses.find(guess => guess === state.answer)) //Boolean(state.guesses.find(guess => guess === state.answer))
+  }
+}
 
-export default connect()(GuessForm);
+export default connect(mapStatetoProps)(GuessForm);

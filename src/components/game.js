@@ -4,11 +4,10 @@ import {connect} from 'react-redux';
 import './game.css';
 
 import GuessSection from './guess-section';
-import GuessForm from './guess-form';
 import FeedbackSection from './feedback';
 import InfoSection from './info'
 
-import { makeGuess, restartGame } from '../actions';
+import { restartGame } from '../actions';
 
 class Game extends React.Component {
 constructor(props){
